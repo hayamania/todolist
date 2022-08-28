@@ -1,5 +1,6 @@
 import "./App.css";
 import React, { useState } from "react";
+import { ImBin } from "react-icons/im";
 
 function App() {
   const [toDolists, setToDolists] = useState([
@@ -38,6 +39,9 @@ function App() {
         {toDolists.map((list, index) => (
           <div className="displayTodo" key={index}>
             {list}
+            <button className="delete-btn">
+              <ImBin />
+            </button>
           </div>
         ))}
       </div>
