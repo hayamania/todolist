@@ -4,15 +4,19 @@ import { ImBin } from "react-icons/im";
 
 function App() {
   const [toDolists, setToDolists] = useState([
-    "Go to supermarket",
-    "make my portfolio",
-    "finish to do list app",
+    { task: "Go to supermarket", complete: false },
+    { task: "make my portfolio", complete: false },
+    { task: "finish to do list app", complete: false },
   ]);
   const [toDoinput, setToDoinput] = useState("");
-  const inputRef = useRef(false);
+  const [complete, setComplete] = useState(false);
+  const inputRef = useRef();
 
   function addToDo(event) {
-    setToDolists((current) => [...current, toDoinput]);
+    setToDolists((current) => [
+      ...current,
+      { task: toDoinput, complete: false },
+    ]);
     inputRef.current.value = "";
     inputRef.current.focus();
     console.log(`Add ${toDoinput} to the list`);
@@ -43,7 +47,7 @@ function App() {
       <div className="display">
         {toDolists.map((list, index) => (
           <div className="displayTodo" key={index} onClick={updateComplete}>
-            <h3>{list}</h3>
+            <h3>{list.task}</h3>
             <button className="delete-btn">
               <ImBin />
             </button>
