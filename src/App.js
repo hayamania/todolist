@@ -16,6 +16,7 @@ function App() {
     }
     inputRef.current.value = "";
     inputRef.current.focus();
+    setToDoinput("");
   }
 
   function updateInput(event) {
@@ -24,16 +25,15 @@ function App() {
 
   function deleteTask(event, index) {
     setToDolists(toDolists.filter((list, i) => i !== index));
-    console.log(`delete task ${index}`);
   }
 
   function updateComplete(event, index) {
     const array = [];
     toDolists.map((list, i) => {
       if (i === index) {
-        array.push({ task: list.task, complete: !list.complete });
+        return array.push({ task: list.task, complete: !list.complete });
       } else {
-        array.push(list);
+        return array.push(list);
       }
     });
     setToDolists(array);
