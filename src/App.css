@@ -33,11 +33,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  transition-duration: 200ms;
+  transition: 400ms all;
 }
 
 .displayTodo:hover {
   scale: 1.1;
+  cursor: pointer;
 }
 
 .delete-btn {

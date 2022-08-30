@@ -4,7 +4,7 @@ import { ImBin } from "react-icons/im";
 
 function App() {
   const [toDolists, setToDolists] = useState([
-    { task: "Go to supermarket", complete: false },
+    { task: "Go to supermarket", complete: true },
     { task: "make my portfolio", complete: false },
     { task: "finish to do list app", complete: false },
   ]);
@@ -13,22 +13,35 @@ function App() {
   const inputRef = useRef();
 
   function addToDo(event) {
-    setToDolists((current) => [
-      ...current,
-      { task: toDoinput, complete: false },
-    ]);
+    if (toDoinput.length > 0) {
+      setToDolists((current) => [
+        ...current,
+        { task: toDoinput, complete: false },
+      ]);
+    }
     inputRef.current.value = "";
     inputRef.current.focus();
-    console.log(`Add ${toDoinput} to the list`);
-    console.log(toDolists);
   }
 
   function updateInput(event) {
     setToDoinput(event.target.value);
   }
 
-  function updateComplete(event) {
-    console.log(`Update complete`);
+  function deleteTask(event, index) {
+    setToDolists(toDolists.filter((list, i) => i !== index));
+    console.log(`delete task ${index}`);
+  }
+
+  function updateComplete(event, index) {
+    const array = [];
+    toDolists.map((list, i) => {
+      if (i === index) {
+        array.push({ task: list.task, complete: !list.complete });
+      } else {
+        array.push(list);
+      }
+    });
+    setToDolists(array);
   }
   return (
     <div className="App">
@@ -46,9 +59,19 @@ function App() {
       </div>
       <div className="display">
         {toDolists.map((list, index) => (
-          <div className="displayTodo" key={index} onClick={updateComplete}>
-            <h3>{list.task}</h3>
-            <button className="delete-btn">
+          <div className="displayTodo" key={index}>
+            <h3
+              style={{
+                textDecoration: list.complete ? "line-through" : "none",
+              }}
+              onClick={(e) => updateComplete(e, index)}
+            >
+              {list.task}
+            </h3>
+            <button
+              className="delete-btn"
+              onClick={(e) => deleteTask(e, index)}
+            >
               <ImBin />
             </button>
           </div>
