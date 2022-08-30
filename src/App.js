@@ -3,11 +3,7 @@ import React, { useState, useRef } from "react";
 import { ImBin } from "react-icons/im";
 
 function App() {
-  const [toDolists, setToDolists] = useState([
-    { task: "Go to supermarket", complete: true },
-    { task: "make my portfolio", complete: false },
-    { task: "finish to do list app", complete: false },
-  ]);
+  const [toDolists, setToDolists] = useState([]);
   const [toDoinput, setToDoinput] = useState("");
   const [complete, setComplete] = useState(false);
   const inputRef = useRef();
