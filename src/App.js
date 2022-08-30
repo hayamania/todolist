@@ -5,7 +5,6 @@ import { ImBin } from "react-icons/im";
 function App() {
   const [toDolists, setToDolists] = useState([]);
   const [toDoinput, setToDoinput] = useState("");
-  const [complete, setComplete] = useState(false);
   const inputRef = useRef();
 
   function addToDo(event) {
